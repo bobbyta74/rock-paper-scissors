@@ -6,3 +6,10 @@ function getComputerChoice () {
     }
     return rps[randomindex - 1];
 }
+
+function getPlayerChoice () {
+    let userinput = "nothing";
+    while (userinput != "rock" && userinput != "paper" && userinput != "scissors") {
+        userinput = prompt("Enter rock, paper or scissors");
+    }
+}
