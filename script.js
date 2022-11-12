@@ -1,4 +1,10 @@
+const resultsdisplay = document.querySelector("#results");
+const playerscore = document.querySelector("#pscore");
+const cpuscore = document.querySelector("#cscore");
+const winner = document.querySelector("#winner");
 //FUNCTIONS
+
+//Random rock, paper or scissors
 function getComputerChoice () {
     const rps = ["rock", "paper", "scissors"];
     let randomindex = 0;
@@ -8,26 +14,42 @@ function getComputerChoice () {
     return rps[randomindex - 1];
 }
 
-function getPlayerChoice () {
-    let userinput = "nothing";
-    while (userinput != "rock" && userinput != "paper" && userinput != "scissors") {
-        userinput = prompt("Enter rock, paper or scissors");
-        userinput.toLowerCase();
+let pscore = 0;
+let cscore = 0;
+
+//Displays scores and shows winner
+function declarewinner() {
+    if (pscore == 5) {
+        winner.textContent = "Player wins!";
+        pscore = 0;
+        cscore = 0;
+    } else if (cscore == 5) {
+        winner.textContent = "Computer wins!";
+        pscore = 0;
+        cscore = 0;
+
     }
-    return userinput;
+    playerscore.textContent = pscore;
+    cpuscore.textContent = cscore;
 }
 
+//Plays round using input and random computer choice
 function playRound(playerSelection, computerSelection) {
     const playerwinsr = playerSelection == "rock" && computerSelection == "scissors";
     const playerwinsp = playerSelection == "paper" && computerSelection == "rock";
     const playerwinss = playerSelection == "scissors" && computerSelection == "paper";
+    let results;
     if (playerwinsr || playerwinsp || playerwinss) {
-        return "You win! \n" + playerSelection + " beats " + computerSelection; 
+        results = "You win! \n" + playerSelection + " beats " + computerSelection; 
+        pscore += 1;
     } else if (playerSelection == computerSelection) {
-        return "Draw!";
+        results = "Draw!";
     } else {
-        return "You lose! \n" + computerSelection + " beats " + playerSelection; 
+        results = "You lose! \n" + computerSelection + " beats " + playerSelection;
+        cscore += 1;
     }
+    resultsdisplay.textContent = results;
+    declarewinner()
 }
 
 //EVENT LISTENERS
