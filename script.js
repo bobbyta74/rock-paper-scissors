@@ -1,3 +1,4 @@
+//FUNCTIONS
 function getComputerChoice () {
     const rps = ["rock", "paper", "scissors"];
     let randomindex = 0;
@@ -22,15 +23,20 @@ function playRound(playerSelection, computerSelection) {
     const playerwinss = playerSelection == "scissors" && computerSelection == "paper";
     if (playerwinsr || playerwinsp || playerwinss) {
         return "You win! \n" + playerSelection + " beats " + computerSelection; 
+    } else if (playerSelection == computerSelection) {
+        return "Draw!";
     } else {
         return "You lose! \n" + computerSelection + " beats " + playerSelection; 
     }
 }
 
-function game() {
-    for (let i=0;i<5;i++) {
-        console.log(playRound(getPlayerChoice(), getComputerChoice()));
-    }
-}
+//EVENT LISTENERS
+const btns = document.querySelectorAll("button");
+console.log(btns);
 
-game();
+for (let i of btns) {
+    i.addEventListener("click", function () {
+        let playerchoice = i.getAttribute("id");
+        console.log(playRound(playerchoice, getComputerChoice()));
+    })
+}
